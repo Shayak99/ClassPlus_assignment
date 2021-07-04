@@ -66,6 +66,9 @@ li.imgblock {
   padding-bottom: 10px;
   padding: 2rem;
 }
+img {
+  padding: 7px;
+}
 .modal-img {
   width: 70vw;
   height: 70vh;

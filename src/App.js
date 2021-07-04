@@ -1,6 +1,7 @@
 import "./styles.css";
 import { useEffect, useState } from "react";
 import TransitionsModal from "./TransitionsModal";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 // const flickr = {
 //   api: "ea269524e985c81c50256848c6fc81f8",
@@ -11,16 +12,14 @@ export default function App() {
   const [state, setstate] = useState([]);
   const [searchterm, setsearchterm] = useState("");
 
-  async function func(p) {
+  async function func() {
     let res = await fetch(
       "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=ea269524e985c81c50256848c6fc81f8&format=json&nojsoncallback=1&text=cats&extras=url_o"
     );
     let user = await res.json();
-    if (p === 1) {
-      let resul = [...state, ...user.photos.photo];
-      setstate(resul);
-    }
-    setstate(user.photos.photo);
+    setTimeout(() => {
+      setstate(user.photos.photo);
+    }, 1500);
   }
   useEffect(() => {
     func();
@@ -41,7 +40,14 @@ export default function App() {
           />
         </div>
       </div>
-      <div className="list">
+      <InfiniteScroll
+        dataLength={state.length}
+        next={func}
+        hasMore={true}
+        loader={<h4>Loading...</h4>}
+        className="list"
+      >
+        {/* <div className="list"> */}
         {state
           .filter((val) => {
             if (searchterm === null) {
@@ -62,7 +68,8 @@ export default function App() {
               />
             </TransitionsModal>
           ))}
-      </div>
+        {/* </div> */}
+      </InfiniteScroll>
     </div>
   );
 }
