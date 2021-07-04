@@ -1,0 +1,74 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+div.App {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+div.App h1 {
+  padding-top: 15px;
+  font-size: 3rem;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#id {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+div.block {
+  margin-top: 7vh;
+  width: 90vw;
+  height: 20vh;
+  background-color: black;
+  color: #fff;
+  padding-left: 200px;
+  margin-left: 25px;
+  margin-right: 40px;
+  margin-bottom: 5px;
+}
+div.block h2 {
+  padding-top: 20px;
+  font-family: "Lobster", cursive;
+  padding-right: 200px;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+.search {
+  width: 30vw;
+  height: 6.4vh;
+  margin-left: 13.7vw;
+  margin-top: 10px;
+  padding: 5px;
+}
+div.list {
+  width: 80vw;
+  margin-left: 10%;
+  padding: 5px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  padding-left: 10vw;
+  padding-right: 10vw;
+  cursor: pointer;
+}
+img:hover {
+  transform: scale(1.1);
+  transition: all 1s ease-out;
+}
+
+li.imgblock {
+  display: inline-block;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding: 2rem;
+}
+.modal-img {
+  width: 70vw;
+  height: 70vh;
+  padding: 10px;
+  transform: translate(-50%, -50%);
+}
