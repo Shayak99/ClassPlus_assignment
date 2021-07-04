@@ -3,15 +3,17 @@ import { useEffect, useState } from "react";
 import TransitionsModal from "./TransitionsModal";
 import InfiniteScroll from "react-infinite-scroll-component";
 
-// const flickr = {
-//   api: "ea269524e985c81c50256848c6fc81f8",
-//   secret: "f12475c097226480"
-// };
+/* const flickr = {
+   api: "ea269524e985c81c50256848c6fc81f8",
+   secret: "f12475c097226480"
+ };*/
 
 export default function App() {
   const [state, setstate] = useState([]);
   const [searchterm, setsearchterm] = useState("");
+  const [list, setlist] = useState([]);
 
+  //async function for fetching an api
   async function func() {
     let res = await fetch(
       "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=ea269524e985c81c50256848c6fc81f8&format=json&nojsoncallback=1&text=cats&extras=url_o"
@@ -21,10 +23,19 @@ export default function App() {
       setstate(user.photos.photo);
     }, 1500);
   }
+  //keeping the fetch function in useeffect to render on page loading
   useEffect(() => {
     func();
   });
 
+  //mapping and storing the input value to localstorage
+  const handlechange = (e) => {
+    setsearchterm(e.target.value);
+    let t;
+    localStorage.setItem("save", t);
+    t = localStorage.getItem("save");
+    setlist(t);
+  };
   return (
     <div className="parent">
       <div className="App">
@@ -36,10 +47,11 @@ export default function App() {
           <input
             className="search"
             placeholder="Search..."
-            onChange={(e) => setsearchterm(e.target.value)}
+            onChange={handlechange}
           />
         </div>
       </div>
+      {/*---- Component used for infinite-scroll----- */}
       <InfiniteScroll
         dataLength={state.length}
         next={func}
@@ -48,6 +60,8 @@ export default function App() {
         className="list"
       >
         {/* <div className="list"> */}
+
+        {/* ----- Output of the searched input ----- */}
         {state
           .filter((val) => {
             if (searchterm === null) {
@@ -60,6 +74,7 @@ export default function App() {
           })
           .map((s, key) => (
             <TransitionsModal>
+              {/*--- material-ui used for making the picture pop up as a modal --- */}
               <img
                 src={s.url_o !== undefined ? s.url_o : null}
                 alt="pic"
@@ -68,7 +83,6 @@ export default function App() {
               />
             </TransitionsModal>
           ))}
-        {/* </div> */}
       </InfiniteScroll>
     </div>
   );

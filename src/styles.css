@@ -26,10 +26,11 @@ div.block {
   background-color: black;
   color: #fff;
   padding-left: 200px;
-  margin-left: 25px;
+  margin-left: 35px;
   margin-right: 40px;
   margin-bottom: 5px;
 }
+
 div.block h2 {
   padding-top: 20px;
   font-family: "Lobster", cursive;
